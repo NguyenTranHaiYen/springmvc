@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -26,6 +28,10 @@ public class PhieuNhap {
 	
 	@OneToMany(mappedBy = "phieuNhap",fetch = FetchType.EAGER)
 	private Collection<ChiTietPhieuNhap> chiTietPhieuNhap;
+	
+	@ManyToOne
+	@JoinColumn(name = "IdNhaCungCap")
+	private NhaCungCap nhaCungCap;
 
 	public Integer getId() {
 		return id;
@@ -49,6 +55,14 @@ public class PhieuNhap {
 
 	public void setChiTietPhieuNhap(Collection<ChiTietPhieuNhap> chiTietPhieuNhap) {
 		this.chiTietPhieuNhap = chiTietPhieuNhap;
+	}
+
+	public NhaCungCap getNhaCungCap() {
+		return nhaCungCap;
+	}
+
+	public void setNhaCungCap(NhaCungCap nhaCungCap) {
+		this.nhaCungCap = nhaCungCap;
 	}
 	
 }

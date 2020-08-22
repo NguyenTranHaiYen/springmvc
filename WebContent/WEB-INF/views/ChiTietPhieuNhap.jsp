@@ -65,6 +65,13 @@
 					</div>
 				</div>
 				<div class="form-group">
+					<label class="col-sm-3 control-label" for="card-holder-name">Giá
+						Nhập</label>
+					<div class="col-sm-9">
+						<form:input path="price" class="form-control" />
+					</div>
+				</div>
+				<div class="form-group">
 					<div class="col-sm-offset-3 col-sm-9">
 						<input type="submit" value="Submit" class="btn btn-success" /> <a
 							class="btn btn-success" href="managechitietphieunhap.html"
@@ -74,7 +81,6 @@
 			</form:form>
 		</fieldset>
 	</div>
-
 </body>
 </html>
 

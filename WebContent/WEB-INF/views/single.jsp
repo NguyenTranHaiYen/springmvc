@@ -21,8 +21,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	
 	
 	
+	
 	 addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
 		function hideURLbar(){ window.scrollTo(0,1); } 
+
 
 
 
@@ -53,14 +55,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<c:choose>
 						<c:when test="${username==null}">
 							<li><a href="login.html"><i class="fa fa-unlock-alt"
-									aria-hidden="true"></i> Sign In </a></li>
+									aria-hidden="true"></i> Đăng Nhập </a></li>
 							<li><a href="signup.html"><i
-									class="fa fa-pencil-square-o" aria-hidden="true"></i> Sign Up </a></li>
+									class="fa fa-pencil-square-o" aria-hidden="true"></i> Đăng Kí </a></li>
 						</c:when>
 						<c:when test="${username!=null}">
 							<li><i class="fa fa-user" aria-hidden="true"></i>${name}</li>
 							<li><a href="signout.html"><i class="fa fa-sign-out"
-									aria-hidden="true"></i> Sign Out </a></li>
+									aria-hidden="true"></i> Đăng Xuất </a></li>
 						</c:when>
 					</c:choose>
 				</ul>
@@ -81,8 +83,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<!-- header-bot -->
 			<div class="col-md-6 header-middle">
 				<form action="#" method="post">
-					<input width="380px" height="50px" type="search" name="search" placeholder="Search here..."
-						required=""> <input type="submit" value=" ">
+					<input width="380px" height="50px" type="search" name="search"
+						placeholder="Tìm Kiếm..." required=""> <input
+						type="submit" value=" ">
 					<div class="clearfix"></div>
 				</form>
 			</div>
@@ -112,7 +115,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							id="bs-example-navbar-collapse-1">
 							<ul class="nav navbar-nav menu__list">
 								<li class="active menu__item"><a class="menu__link"
-									href="index.html">Home <span class="sr-only">(current)</span></a></li>
+									href="index.html">Trang Chủ <span class="sr-only">(current)</span></a></li>
 								<!-- <li class=" menu__item"><a class="menu__link" href="about.html">About</a></li> -->
 								<li class="dropdown menu__item menu__item--current"><a
 									href="#" class="dropdown-toggle menu__link"
@@ -142,14 +145,26 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			</div>
 			<div class="top_nav_right">
 				<div class="wthreecartaits wthreecartaits2 cart cart box_1">
-					<form action="#" method="post" class="last">
-						<input type="hidden" name="cmd" value="_cart"> <input
-							type="hidden" name="display" value="1">
-						<button class="w3view-cart" type="submit" name="submit" value="">
-							<i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
-						</button>
-					</form>
-
+					<c:choose>
+						<c:when test="${username==null}">
+							<form action="login.html" method="get" class="last">
+								<input type="hidden" name="cmd" value="_cart"> <input
+									type="hidden" name="display" value="1">
+								<button class="w3view-cart" type="submit" name="submit" value="">
+									<i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
+								</button>
+							</form>
+						</c:when>
+						<c:when test="${username!=null}">
+							<form action="cart.html" method="post" class="last">
+								<input type="hidden" name="cmd" value="_cart"> <input
+									type="hidden" name="display" value="1">
+								<button class="w3view-cart" type="submit" name="submit" value="">
+									<i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
+								</button>
+							</form>
+						</c:when>
+					</c:choose>
 				</div>
 			</div>
 			<div class="clearfix"></div>
@@ -201,20 +216,42 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<div class="occasion-cart">
 					<div
 						class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
-						<form action="#" method="post">
-							<fieldset>
-								<input type="hidden" name="cmd" value="_cart"> <input
-									type="hidden" name="add" value="1"> <input
-									type="hidden" name="business" value=" "> <input
-									type="hidden" name="item_name" value="Wing Sneakers"> <input
-									type="hidden" name="amount" value="650.00"> <input
-									type="hidden" name="discount_amount" value="1.00"> <input
-									type="hidden" name="currency_code" value="USD"> <input
-									type="hidden" name="return" value=" "> <input
-									type="hidden" name="cancel_return" value=" "> <input
-									type="submit" name="submit" value="Add to cart" class="button">
-							</fieldset>
-						</form>
+						<c:choose>
+							<c:when test="${username==null}">
+								<form action="login.html" method="get">
+									<fieldset>
+										<input type="hidden" name="cmd" value="_cart" /> <input
+											type="hidden" name="add" value="1" /> <input type="hidden"
+											name="business" value=" " /> <input type="hidden"
+											name="item_name" value="${product.name}" /> <input type="hidden"
+											name="amount" value="${product.price - product.price*(product.discount/100)}" />
+										<input type="hidden" name="discount_amount" value="1.00" /> <input
+											type="hidden" name="currency_code" value="VND" /> <input
+											type="hidden" name="return" value=" " /> <input
+											type="hidden" name="cancel_return" value=" " /> <a href=""><input
+											type="submit" name="submit" value="Thêm Vào Giỏ Hàng"
+											class="button" /></a>
+									</fieldset>
+								</form>
+							</c:when>
+							<c:when test="${username!=null}">
+								<form action="add/${product.proId}.html" method="post">
+									<fieldset>
+										<input type="hidden" name="cmd" value="_cart" /> <input
+											type="hidden" name="add" value="1" /> <input type="hidden"
+											name="business" value=" " /> <input type="hidden"
+											name="item_name" value="${product.name}" /> <input type="hidden"
+											name="amount" value="${product.price - product.price*(product.discount/100)}" />
+										<input type="hidden" name="discount_amount" value="1.00" /> <input
+											type="hidden" name="currency_code" value="VND" /> <input
+											type="hidden" name="return" value=" " /> <input
+											type="hidden" name="cancel_return" value=" " /> <a href=""><input
+											type="submit" name="submit" value="Thêm Vào Giỏ Hàng"
+											class="button" /></a>
+									</fieldset>
+								</form>
+							</c:when>
+						</c:choose>
 					</div>
 
 				</div>
@@ -225,8 +262,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<div class="responsive_tabs_agileits">
 				<div id="horizontalTab">
 					<ul class="resp-tabs-list">
-						<li>Description</li>
-						<li>Information</li>
+						<li>Mô Tả</li>
+						<li>Thông Tin</li>
 					</ul>
 					<div class="resp-tabs-container">
 						<!--/tab_one-->
@@ -258,7 +295,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 			<div class="w3_agile_latest_arrivals">
 				<h3 class="wthree_text_info">
-					Sản Phẩm<span>Tương Tự</span>
+					Sản Phẩm <span> Tương Tự</span>
 				</h3>
 				<c:forEach var="p" items="${lProduct}">
 					<div class="col-md-3 product-men">
@@ -268,8 +305,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									src="${p.image}" alt="" class="pro-image-back">
 								<div class="men-cart-pro">
 									<div class="inner-men-cart-pro">
-										<a href="single/${p.proId}.html" class="link-product-add-cart">Quick
-											View</a>
+										<a href="single/${p.proId}.html" class="link-product-add-cart">Chi
+											Tiết</a>
 									</div>
 								</div>
 								<span class="product-new-top">New</span>
@@ -285,21 +322,44 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								</div>
 								<div
 									class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
-									<form action="#" method="post">
-										<fieldset>
-											<input type="hidden" name="cmd" value="_cart" /> <input
-												type="hidden" name="add" value="1" /> <input type="hidden"
-												name="business" value=" " /> <input type="hidden"
-												name="item_name" value="${p.name}" /> <input type="hidden"
-												name="amount" value="${p.price - p.price*(p.discount/100)}" />
-											<input type="hidden" name="discount_amount" value="1.00" />
-											<input type="hidden" name="currency_code" value="VND" /> <input
-												type="hidden" name="return" value=" " /> <input
-												type="hidden" name="cancel_return" value=" " /> <input
-												type="submit" name="submit" value="Add to cart"
-												class="button" />
-										</fieldset>
-									</form>
+									<c:choose>
+										<c:when test="${username==null}">
+											<form action="login.html" method="get">
+												<fieldset>
+													<input type="hidden" name="cmd" value="_cart" /> <input
+														type="hidden" name="add" value="1" /> <input
+														type="hidden" name="business" value=" " /> <input
+														type="hidden" name="item_name" value="${p.name}" /> <input
+														type="hidden" name="amount"
+														value="${p.price - p.price*(p.discount/100)}" /> <input
+														type="hidden" name="discount_amount" value="1.00" /> <input
+														type="hidden" name="currency_code" value="VND" /> <input
+														type="hidden" name="return" value=" " /> <input
+														type="hidden" name="cancel_return" value=" " /> <a
+														href=""><input type="submit" name="submit"
+														value="Thêm Vào Giỏ Hàng" class="button" /></a>
+												</fieldset>
+											</form>
+										</c:when>
+										<c:when test="${username!=null}">
+											<form action="add/${p.proId}.html" method="post">
+												<fieldset>
+													<input type="hidden" name="cmd" value="_cart" /> <input
+														type="hidden" name="add" value="1" /> <input
+														type="hidden" name="business" value=" " /> <input
+														type="hidden" name="item_name" value="${p.name}" /> <input
+														type="hidden" name="amount"
+														value="${p.price - p.price*(p.discount/100)}" /> <input
+														type="hidden" name="discount_amount" value="1.00" /> <input
+														type="hidden" name="currency_code" value="VND" /> <input
+														type="hidden" name="return" value=" " /> <input
+														type="hidden" name="cancel_return" value=" " /> <a
+														href=""><input type="submit" name="submit"
+														value="Thêm Vào Giỏ Hàng" class="button" /></a>
+												</fieldset>
+											</form>
+										</c:when>
+									</c:choose>
 								</div>
 
 							</div>
@@ -321,8 +381,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<i class="fa fa-truck" aria-hidden="true"></i>
 					</div>
 					<div class="w3layouts_mail_grid_left2">
-						<h3>FREE SHIPPING</h3>
-						<p>Lorem ipsum dolor sit amet, consectetur</p>
+						<h3>Giao Hàng miễn phí</h3>
+						<p>Giao Hàng miễn phí tận nhà trong 24 giờ</p>
 					</div>
 				</div>
 				<div class="col-md-3 w3layouts_mail_grid_left">
@@ -330,8 +390,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<i class="fa fa-headphones" aria-hidden="true"></i>
 					</div>
 					<div class="w3layouts_mail_grid_left2">
-						<h3>24/7 SUPPORT</h3>
-						<p>Lorem ipsum dolor sit amet, consectetur</p>
+						<h3>Hỗ trợ 24/7</h3>
+						<p>Hỗ trợ khách hàng nhiệt tình 24/7</p>
 					</div>
 				</div>
 				<div class="col-md-3 w3layouts_mail_grid_left">
@@ -339,8 +399,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<i class="fa fa-shopping-bag" aria-hidden="true"></i>
 					</div>
 					<div class="w3layouts_mail_grid_left2">
-						<h3>MONEY BACK GUARANTEE</h3>
-						<p>Lorem ipsum dolor sit amet, consectetur</p>
+						<h3>Tiết kiệm đối đa chi phí</h3>
+						<p>Sản phẩm chất lượng với giá cả phải chăng</p>
 					</div>
 				</div>
 				<div class="col-md-3 w3layouts_mail_grid_left">
@@ -348,8 +408,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<i class="fa fa-gift" aria-hidden="true"></i>
 					</div>
 					<div class="w3layouts_mail_grid_left2">
-						<h3>FREE GIFT COUPONS</h3>
-						<p>Lorem ipsum dolor sit amet, consectetur</p>
+						<h3>quà tặng hấp dẫn</h3>
+						<p>Những phần quà hấp dẫn đang đợi bạn</p>
 					</div>
 				</div>
 				<div class="clearfix"></div>
@@ -372,7 +432,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<div class="sign-grds">
 					<div class="sign-gd-two">
 						<h4>
-							Store <span>Information</span>
+							Thông tin <span>Cửa Hàng</span>
 						</h4>
 						<div class="w3-address">
 							<div class="w3-address-grid">
@@ -380,7 +440,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									<i class="fa fa-phone" aria-hidden="true"></i>
 								</div>
 								<div class="w3-address-right">
-									<h6>Phone Number</h6>
+									<h6>Số Điện Thoại</h6>
 									<p>023 567 8901</p>
 								</div>
 								<div class="clearfix"></div>
@@ -390,11 +450,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 									<i class="fa fa-envelope" aria-hidden="true"></i>
 								</div>
 								<div class="w3-address-right">
-									<h6>Email Address</h6>
-									<p>
-										Email :<a href="mailto:example@email.com">
-											studyshop@gmail.com</a>
-									</p>
+									<h6>Email</h6>
+									<p>studyshop@gmail.com</p>
 								</div>
 								<div class="clearfix"></div>
 							</div>

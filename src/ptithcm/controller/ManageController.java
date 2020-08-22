@@ -22,10 +22,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import ptithcm.entity.Cart;
 import ptithcm.entity.CartItem;
 import ptithcm.entity.ChiTietPhieuNhap;
+import ptithcm.entity.NhaCungCap;
 import ptithcm.entity.PhieuNhap;
 import ptithcm.entity.Product;
 
@@ -113,8 +115,8 @@ public class ManageController {
 
 		Session session = factory.openSession();
 		Transaction t = session.beginTransaction();
-		Product p= new Product();
-		p=product;
+		Product p = new Product();
+		p = product;
 		try {
 			session.saveOrUpdate(p);
 			t.commit();
@@ -293,20 +295,31 @@ public class ManageController {
 		return "xemPhieuNhap";
 	}
 
-	@RequestMapping(value = "/managechitietphieunhap")
+	@RequestMapping(value = "/managechitietphieunhap", method = RequestMethod.GET)
 	public String quanliChiTiet(ModelMap model, HttpSession session1) {
 		if (session1.getAttribute("phieuNhap") == null) {
 			PhieuNhap phieuNhap = new PhieuNhap();
 			session1.setAttribute("phieuNhap", phieuNhap);
 		}
+
 		PhieuNhap pn = (PhieuNhap) session1.getAttribute("phieuNhap");
 		List<ChiTietPhieuNhap> list = (List<ChiTietPhieuNhap>) pn.getChiTietPhieuNhap();
-		if (list == null) {
-			model.addAttribute("listChiTietPhieuNhap", list);
 
-			return "phieuNhap";
-		}
 		Session session = factory.getCurrentSession();
+
+		if (list == null) {
+			try {
+				String hql = "FROM NhaCungCap";
+				Query query = session.createQuery(hql);
+				List<NhaCungCap> listncc = query.list();
+				model.addAttribute("listChiTietPhieuNhap", list);
+				model.addAttribute("listncc", listncc);
+				model.addAttribute("ncc", listncc.get(0));
+				return "phieuNhap";
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+		}
 
 		for (int i = 0; i < list.size(); i++) {
 			String hql1 = "FROM Product WHERE proId= '" + list.get(i).getProduct().getProId() + "'";
@@ -314,8 +327,17 @@ public class ManageController {
 			Product x = (Product) query1.uniqueResult();
 			list.get(i).setProduct(x);
 		}
-		model.addAttribute("listChiTietPhieuNhap", list);
-
+		try {
+			String hql = "FROM NhaCungCap";
+			Query query = session.createQuery(hql);
+			List<NhaCungCap> listncc = query.list();
+			model.addAttribute("listChiTietPhieuNhap", list);
+			model.addAttribute("listncc", listncc);
+			model.addAttribute("ncc", listncc.get(0));
+			return "phieuNhap";
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 		return "phieuNhap";
 	}
 
@@ -372,14 +394,26 @@ public class ManageController {
 	}
 
 	@RequestMapping(value = "/savePhieuNhap")
-	public String savePhieuNhap(ModelMap model, HttpSession session1) throws ParseException {
+	public String savePhieuNhap(@RequestParam("nhacungcap") int id, ModelMap model, HttpSession session1) throws ParseException {
 
 		PhieuNhap pn = (PhieuNhap) session1.getAttribute("phieuNhap");
+		
 		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 		Date date = new Date();
 		String datetime = formatter.format(date);
 		Date date1 = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(datetime);
 		pn.setDate(date1);
+		
+		Session session4 = factory.getCurrentSession();
+		NhaCungCap ncc= new NhaCungCap();
+		try {
+			String hql = "FROM NhaCungCap WHERE id = '" + id + "'";
+			Query query = session4.createQuery(hql);
+			ncc= (NhaCungCap) query.uniqueResult();
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		pn.setNhaCungCap(ncc);
 		List<ChiTietPhieuNhap> list = (List<ChiTietPhieuNhap>) pn.getChiTietPhieuNhap();
 		Session session = factory.openSession();
 		Transaction t = session.beginTransaction();
@@ -387,15 +421,15 @@ public class ManageController {
 			session.saveOrUpdate(pn);
 			for (ChiTietPhieuNhap ct : list) {
 				ct.setPhieuNhap(pn);
-				session.saveOrUpdate(ct); 
+				session.saveOrUpdate(ct);
 				String hql1 = "FROM Product WHERE proId= '" + ct.getProduct().getProId() + "'";
 				Query query1 = session.createQuery(hql1);
 				Product x = (Product) query1.uniqueResult();
-				x.setTotal(x.getTotal()+ ct.getTotal());
-				x.setQuantity(x.getQuantity()+ct.getTotal());
+				x.setTotal(x.getTotal() + ct.getTotal());
+				x.setQuantity(x.getQuantity() + ct.getTotal());
 				session.saveOrUpdate(x);
-			} 
-			t.commit(); 
+			}
+			t.commit();
 			model.addAttribute("message", "Thêm thành công !");
 			session1.removeAttribute("phieuNhap");
 		} catch (Exception e) {

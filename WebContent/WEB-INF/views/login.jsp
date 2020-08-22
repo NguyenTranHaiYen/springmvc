@@ -51,7 +51,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<div class="login-page">
 		<div class="login-main">
 			<div class="login-head">
-				<h1>Login</h1>
+				<h1>Đăng Nhập</h1>
 			</div>
 			<div class="login-block">
 				<form:form action="login.html" modelAttribute="user" method="POST">
@@ -60,13 +60,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<form:errors path="email" />
 					<form:input path="email" />
 
-					<label>Password</label>
+					<label>Mật Khẩu</label>
 					<form:errors path="password" />
 					<form:input path="password" type="password" />
 
 					<div class="clearfix"></div>
 
-					<input type="submit" name="Sign In" value="Login">
+					<input type="submit" name="Sign In" value="Đăng Nhập">
 					<h3>
 						Chưa có tài khoản?<a href="signup.html"> Đăng kí tại đây!</a>
 					</h3>

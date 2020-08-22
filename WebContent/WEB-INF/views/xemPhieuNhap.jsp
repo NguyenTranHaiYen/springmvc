@@ -29,71 +29,49 @@
 <link href="css/style2.css" rel="stylesheet" type="text/css" media="all" />
 </head>
 <body>
-	<div class="page-container">
-		<div class="left-content">
-			<div class="mother-grid-inner">
-				<div class="container">
-
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<br />
+				<div class="table-responsive">
+					<div class="row">
+						<div class="col col-xs-12">
+							<h1 style="margin-top: 30px">Chi Tiết Phiếu Nhập</h1>
+							<h4 style="margin-top: 10px; margin-bottom: 15px">Mã Phiếu
+								Nhập: ${id}</h4>
+							<a class="btn btn-success" href="managephieunhap.html"
+								style="margin-top: 0px !important; margin-bottom: 25px"><i
+								style="margin-right: 10px" class="fa fa-reply"></i>Quay lại</a>
+						</div>
+					</div>
+					<div class="clearfix"></div>
 					<div class="row">
 						<div class="col-md-12">
-							<br />
 							<div class="table-responsive">
-								<div class="row">
-									<div class="col col-xs-12">
-										<h1 style="margin-top: 30px">Chi Tiết Phiếu Nhập</h1>
-										<h4 style="margin-top: 10px; margin-bottom: 15px">Mã
-											Phiếu Nhập: ${id}</h4>
-										<a class="btn btn-success" href="managephieunhap.html" style="margin-top: 0px!important;  margin-bottom: 25px"><i style="margin-right: 10px"
-											class="fa fa-reply"></i>Quay lại</a>
-									</div>
-								</div>
+								<table id="mytable" class="table table-bordred table-striped">
+									<thead>
+										<th>Tên Sản Phẩm</th>
+										<th>Hình Ảnh</th>
+										<th>Số lượng</th>
+										<th>Giá Nhập</th>
+									</thead>
+									<tbody>
+										<c:forEach var="item" items="${list}">
+											<tr>
+												<td>${item.product.name}</td>
+												<td><image width="100px" src="${item.product.image}" /></td>
+												<td>${item.total}</td>
+												<td>${item.price}</td>
+											</tr>
+										</c:forEach>
+									</tbody>
+								</table>
 								<div class="clearfix"></div>
-								<div class="row">
-									<div class="col-md-12">
-										<div class="table-responsive">
-											<table id="mytable" class="table table-bordred table-striped">
-												<thead>
-													<th>Tên Sản Phẩm</th>
-													<th>Hình Ảnh</th>
-													<th>Số lượng</th>
-												</thead>
-												<tbody>
-													<c:forEach var="item" items="${list}">
-														<tr>
-															<td>${item.product.name}</td>
-															<td><image width="100px" src="${item.product.image}" /></td>
-															<td>${item.total}</td>
-														</tr>
-													</c:forEach>
-												</tbody>
-											</table>
-											<div class="clearfix"></div>
-										</div>
-									</div>
-								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-	</div>
-	<!--slider menu-->
-	<div class="sidebar-menu" style="height: 100%">
-		<div class="menu">
-			<ul id="menu">
-				<li id="menu-home"><a href="manage.html"><i
-						class="fa fa-home"></i><span>Home</span></a></li>
-
-				<li id="menu-comunicacao"><a href="managephieunhap.html"><i
-						class="fa fa-book nav_icon"></i><span>Quản Lí Phiếu Nhập</span></a></li>
-
-				<li id="menu-comunicacao"><a href="manageproduct.html"><i
-						class="fa fa-book nav_icon"></i><span>Quản Lí Sản Phẩm</span></a></li>
-
-				<li><a href="managecart.html"><i
-						class="fa fa-shopping-cart"></i><span>Quản Lí Giỏ Hàng</span></span></a></li>
-			</ul>
 		</div>
 	</div>
 	<div class="clearfix"></div>

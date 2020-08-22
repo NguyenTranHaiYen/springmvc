@@ -26,6 +26,8 @@ public class ChiTietPhieuNhap {
 	private PhieuNhap phieuNhap;
 
 	private Integer total;
+	
+	private Float price;
 
 	public Integer getId() {
 		return id;
@@ -64,5 +66,13 @@ public class ChiTietPhieuNhap {
 		return "ChiTietPhieuNhap [id=" + id + ", product=" + product + ", phieuNhap=" + phieuNhap + ", total=" + total
 				+ "]";
 	}
-	
+
+	public Float getPrice() {
+		return price;
+	}
+
+	public void setPrice(Float price) {
+		this.price = price;
+	}
+
 }
