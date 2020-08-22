@@ -118,10 +118,19 @@
 							style="display:none"/>
 					</div>
 				</div>
+				<div class="form-group">
+					<div class="col-sm-9">
+						<form:input path="total" class="form-control" readonly="true"
+							style="display:none"/>
+					</div>
+				</div>
 
 				<div class="form-group">
 					<div class="col-sm-offset-3 col-sm-9">
-						<input type="submit" value="Submit" class="btn btn-success" />
+					<a class="btn btn-success" href="manageproduct.html"
+						style="margin-top: 27px !important; margin-bottom: 25px"><i
+						style="margin-right: 10px" class="fa fa-reply"></i>Quay lại</a>
+						<input  style="margin-top: 0px !important" type="submit" value="Submit" class="btn btn-success" />
 					</div>
 				</div>
 			</form:form>

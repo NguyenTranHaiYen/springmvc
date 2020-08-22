@@ -29,6 +29,8 @@ public class Product {
 	private String image;
 	
 	private Integer quantity;
+	
+	private Integer total;
 
 	@OneToMany(mappedBy = "proid",fetch = FetchType.EAGER)
 	private Collection<CartItem> cartitem;
@@ -106,6 +108,14 @@ public class Product {
 
 	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
+	}
+
+	public Integer getTotal() {
+		return total;
+	}
+
+	public void setTotal(Integer total) {
+		this.total = total;
 	}
 
 	public Collection<CartItem> getCartitem() {

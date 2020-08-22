@@ -33,8 +33,11 @@
 	<div class="container">
 		<div class="row">
 			<div class="col col-xs-12">
-				<h1 style="margin-top: 30px">Quản Lí Danh Sách Sản Phẩm</h1>				
-				<a class="btn btn-success" href="insert.html"><i class="fa fa-plus-circle"></i>Thêm Mới</a>
+				<h1 style="margin-top: 30px">Quản Lí Danh Sách Sản Phẩm</h1>	
+				<a class="btn btn-success" href="manage.html"
+						style="margin-top: 15px !important; margin-bottom: 0px"><i
+						style="margin-right: 10px" class="fa fa-reply"></i>Quay lại</a>			
+				<a style="margin-top: 15px !important" class="btn btn-success" href="insert.html"><i class="fa fa-plus-circle"></i>Thêm Mới</a>
 			</div>
 		</div>
 		<div class="clearfix"></div>
@@ -51,7 +54,8 @@
 							<th>Loại Sản Phẩm</th>
 							<th>Mô Tả</th>
 							<th>Thông Tin</th>
-							<th>Số lượng</th>
+							<th>Tổng số lượng</th>
+							<th>Còn Lại</th>
 							<th style="width: 50px;">Edit</th>
 						</thead>
 						<tbody>
@@ -64,6 +68,7 @@
 									<td>${item.category.cateName}</td>
 									<td>${item.description}</td>
 									<td>${item.information}</td>
+									<td>${item.total}</td>
 									<td>${item.quantity}</td>
 									<td><a class="btn btn-success" href="${item.proId}.html"><span
 											class="glyphicon glyphicon-pencil"></span></a></td>

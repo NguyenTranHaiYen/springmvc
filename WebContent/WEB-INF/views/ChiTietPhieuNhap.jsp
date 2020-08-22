@@ -66,9 +66,11 @@
 				</div>
 				<div class="form-group">
 					<div class="col-sm-offset-3 col-sm-9">
-						<input type="submit" value="Submit" class="btn btn-success" />
+						<input type="submit" value="Submit" class="btn btn-success" /> <a
+							class="btn btn-success" href="managechitietphieunhap.html"
+							style="margin-top: 25px !important; margin-bottom: 0px"><i
+							style="margin-right: 10px" class="fa fa-reply"></i>Quay lại</a>
 					</div>
-				</div>
 			</form:form>
 		</fieldset>
 	</div>

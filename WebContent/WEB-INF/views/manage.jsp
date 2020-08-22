@@ -124,7 +124,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<div class="header-main">
 					<div class="header-left">
 						<div class="logo-name">
-							<a href="index.html">
+							<a href="manage.html">
 								<h1>Shoppy</h1> <!--<img id="logo" src="" alt="Logo"/>-->
 							</a>
 						</div>

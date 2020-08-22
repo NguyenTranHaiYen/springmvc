@@ -58,5 +58,11 @@ public class ChiTietPhieuNhap {
 	public void setTotal(Integer total) {
 		this.total = total;
 	}
+
+	@Override
+	public String toString() {
+		return "ChiTietPhieuNhap [id=" + id + ", product=" + product + ", phieuNhap=" + phieuNhap + ", total=" + total
+				+ "]";
+	}
 	
 }

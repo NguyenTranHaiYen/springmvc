@@ -34,6 +34,9 @@
 		<div class="row">
 			<div class="col col-xs-12">
 				<h1 style="margin-top: 30px">Quản Lí Giỏ Hàng</h1>
+				<a class="btn btn-success" href="manage.html"
+						style="margin-top: 15px !important; margin-bottom: 0px"><i
+						style="margin-right: 10px" class="fa fa-reply"></i>Quay lại</a>	
 			</div>
 		</div>
 		<div class="clearfix"></div>

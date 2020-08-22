@@ -223,7 +223,6 @@ public class CartController {
 		return "redirect:/cart.html";
 	}
 
-	// delete chưa sửa
 	@RequestMapping(value = "move/{proId}", method = RequestMethod.GET)
 	public String delete(ModelMap model, @PathVariable("proId") int proId, HttpSession session1) {
 
@@ -242,18 +241,13 @@ public class CartController {
 			k.getProid().setQuantity(k.getProid().getQuantity() + k.getQuantity());
 			System.out.println("QUANTITY PRODUCT AFTER ADD PRODUCT" + k.getProid().getQuantity());
 			session.delete(k);
-			// s.commit();
 
 			model.addAttribute("listProduct", getList());
 			return "redirect:/cart.html";
-
 		} catch (Exception e) {
-			// s.rollback();
+			System.out.println(e);
 
 		}
-//		} finally {
-//			session.close();
-//		}
 		return "redirect:/cart.html";
 	}
 

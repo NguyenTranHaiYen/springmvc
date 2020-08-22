@@ -7,10 +7,10 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Profile Form</title>
-		<base href="${pageContext.servletContext.contextPath}/">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Profile Form</title>
+<base href="${pageContext.servletContext.contextPath}/">
 <!-- css -->
 <link href="css/bootstrap.css" rel="stylesheet" type="text/css"
 	media="all" />
@@ -27,97 +27,112 @@
 	href='//fonts.googleapis.com/css?family=Lato:400,100,100italic,300,300italic,400italic,700,900,900italic,700italic'
 	rel='stylesheet' type='text/css'>
 
-    </head>
-    <body>
+</head>
+<body>
 
-        <div class="container">
-            <br/>
-            <div class="row">
-                <div class="col col-xs-12">
-                    <image width="1170px" height="293px" src="images/shutterstock_1037827069.jpg" />
-                </div>
-                
-            </div>
-            <div class="clearfix"></div>
-            <fieldset>
-                <form:form action="insert.html" method="POST" modelAttribute="product" 
-                            class="form-horizontal">
-                    
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label" >${message}</label>
-                    </div>
-                   
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label" >Tên</label>
-                        <div class="col-sm-9">
-                            <form:input path="name" class="form-control" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label" for="card-number">Hình Ảnh</label>
-                        <div class="col-sm-9">
-                            <form:input path="image" class="form-control" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label" for="cvv">Giá</label>
-                        <div class="col-sm-3">
-                            <form:input path="price" class="form-control" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label" for="card-holder-name">% Khuyến Mãi</label>
-                        <div class="col-sm-9">
-                            <form:input path="discount" class="form-control" />
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label" for="expiry-month">Loại Sản Phẩm</label>
-                        <div class="col-sm-9">
-                            <div class="row">
-                                <div class="col-xs-3">
-                                    <form:select path="category.cateId" class="form-control col-sm-2">
-                                        <form:option value="1" label="Sổ Vở"/>
-                                        <form:option value="2" label="Bút"/>
-                                        <form:option value="3" label="Hộp Bút"/>
-                                        <form:option value="4" label="Thước"/>
-                                    </form:select>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-					
-					<div class="form-group">
-                        <label class="col-sm-3 control-label" for="card-holder-name">Mô Tả</label>
-                        <div class="col-sm-9">
-                            <form:input path="description" class="form-control" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label" for="card-holder-name">Thông Tin</label>
-                        <div class="col-sm-9">
-                            <form:input path="information" class="form-control" />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-3 control-label" for="card-holder-name">Số Lượng</label>
-                        <div class="col-sm-9">
-                            <form:input path="quantity" class="form-control" />
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <div class="col-sm-offset-3 col-sm-9">
-                            <input type="submit" value="Submit" class="btn btn-success"/>
-                        </div>
-                    </div>
-                </form:form>
-            </fieldset>
-        </div>
+	<div class="container">
+		<br />
+		<div class="row">
+			<div class="col col-xs-12">
+				<image width="1170px" height="293px"
+					src="images/shutterstock_1037827069.jpg" />
+			</div>
 
-    </body>
+		</div>
+		<div class="clearfix"></div>
+		<fieldset>
+			<form:form action="insert.html" method="POST"
+				modelAttribute="product" class="form-horizontal">
+
+				<div class="form-group">
+					<label class="col-sm-3 control-label">${message}</label>
+				</div>
+
+				<div class="form-group">
+					<label class="col-sm-3 control-label">Tên</label>
+					<div class="col-sm-9">
+						<form:input path="name" class="form-control" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-3 control-label" for="card-number">Hình
+						Ảnh</label>
+					<div class="col-sm-9">
+						<form:input path="image" class="form-control" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-3 control-label" for="cvv">Giá</label>
+					<div class="col-sm-3">
+						<form:input path="price" class="form-control" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-3 control-label" for="card-holder-name">%
+						Khuyến Mãi</label>
+					<div class="col-sm-9">
+						<form:input path="discount" class="form-control" />
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-sm-3 control-label" for="expiry-month">Loại
+						Sản Phẩm</label>
+					<div class="col-sm-9">
+						<div class="row">
+							<div class="col-xs-3">
+								<form:select path="category.cateId"
+									class="form-control col-sm-2">
+									<form:option value="1" label="Sổ Vở" />
+									<form:option value="2" label="Bút" />
+									<form:option value="3" label="Hộp Bút" />
+									<form:option value="4" label="Thước" />
+								</form:select>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-sm-3 control-label" for="card-holder-name">Mô
+						Tả</label>
+					<div class="col-sm-9">
+						<form:input path="description" class="form-control" />
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-3 control-label" for="card-holder-name">Thông
+						Tin</label>
+					<div class="col-sm-9">
+						<form:input path="information" class="form-control" />
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-9">
+						<form:input path="quantity" class="form-control" readonly="true" value="0"
+							style="display:none"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-9">
+						<form:input path="total" class="form-control" readonly="true" value="0"
+							style="display:none"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-offset-3 col-sm-9">
+					<a class="btn btn-success" href="manageproduct.html"
+						style="margin-top: 27px !important; margin-bottom: 25px"><i
+						style="margin-right: 10px" class="fa fa-reply"></i>Quay lại</a>
+						<input  style="margin-top: 0px !important" type="submit" value="Submit" class="btn btn-success" />
+					</div>
+				</div>
+			</form:form>
+		</fieldset>
+	</div>
+
+</body>
 </html>
 
-                      
-						
+
+

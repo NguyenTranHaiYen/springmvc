@@ -36,6 +36,9 @@
 			<div class="col-md-12">
 				<br />
 				<div class="table-responsive">
+				<a class="btn btn-success" href="managecart.html"
+						style="margin-top: 15px !important; margin-bottom: 15px"><i
+						style="margin-right: 10px" class="fa fa-reply"></i>Quay lại</a>
 					<c:choose>
 						<c:when test="${isPaid==0}">
 							<table id="mytable" class="table table-bordred table-striped">

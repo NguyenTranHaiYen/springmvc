@@ -113,8 +113,10 @@ public class ManageController {
 
 		Session session = factory.openSession();
 		Transaction t = session.beginTransaction();
+		Product p= new Product();
+		p=product;
 		try {
-			session.saveOrUpdate(product);
+			session.saveOrUpdate(p);
 			t.commit();
 			model.addAttribute("message", "Thêm thành công !");
 		} catch (Exception e) {
@@ -123,7 +125,7 @@ public class ManageController {
 		} finally {
 			session.close();
 		}
-		return "manageproduct_form";
+		return "redirect:/manageproduct.html";
 	}
 
 	@RequestMapping("{proId}")
@@ -379,40 +381,30 @@ public class ManageController {
 		Date date1 = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(datetime);
 		pn.setDate(date1);
 		List<ChiTietPhieuNhap> list = (List<ChiTietPhieuNhap>) pn.getChiTietPhieuNhap();
-		List<ChiTietPhieuNhap> l= new ArrayList<ChiTietPhieuNhap>();
-		for (int i=0;i<list.size();i++) {
-			
-			ChiTietPhieuNhap ctpn= new ChiTietPhieuNhap();
-			
-			PhieuNhap phieu= new PhieuNhap();
-			phieu.setId(list.get(i).getPhieuNhap().getId());
-			ctpn.setPhieuNhap(phieu);
-			
-			Product product= new Product();
-			product.setProId(list.get(i).getProduct().getProId());
-			ctpn.setProduct(product);
-			
-			ctpn.setTotal(list.get(i).getTotal());
-			
-			l.set(i, ctpn);
-		}
-		
 		Session session = factory.openSession();
 		Transaction t = session.beginTransaction();
 		try {
-			session.saveOrUpdate(pn);// cái này chạy được => cái này insert phiếu nhập nè cậu
-			for (ChiTietPhieuNhap ct : l) {
-				session.saveOrUpdate(ct); //cái này không. cái này là insert list chi tiết phiếu nhập nằm trong cái session phiếu nhập
-			} // mà cái list chi tiết phiếu nhập mình render lên giao diện được rồi nè. xem demo nè
-			t.commit(); // mà giờ nhấn lưu phiếu nhập thì nó k insert đc 
+			session.saveOrUpdate(pn);
+			for (ChiTietPhieuNhap ct : list) {
+				ct.setPhieuNhap(pn);
+				session.saveOrUpdate(ct); 
+				String hql1 = "FROM Product WHERE proId= '" + ct.getProduct().getProId() + "'";
+				Query query1 = session.createQuery(hql1);
+				Product x = (Product) query1.uniqueResult();
+				x.setTotal(x.getTotal()+ ct.getTotal());
+				x.setQuantity(x.getQuantity()+ct.getTotal());
+				session.saveOrUpdate(x);
+			} 
+			t.commit(); 
 			model.addAttribute("message", "Thêm thành công !");
+			session1.removeAttribute("phieuNhap");
 		} catch (Exception e) {
 			t.rollback();
 		} finally {
 			session.close();
 		}
 		System.out.println("helooooooooo");
-		return "redirect:/managechitietphieunhap.html";
+		return "redirect:/managephieunhap.html";
 	}
 
 }
